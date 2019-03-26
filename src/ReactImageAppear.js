@@ -30,13 +30,14 @@ class ReactImageAppear extends Component {
     }
 
     componentDidMount() {
-        const { src } = this.props;
+        const { src,alt } = this.props;
 
         let imgElement;
         this.setState((prevState, props) => {
             return {
                 imgComponent: React.createElement('img', {
                     src,
+                    alt,
                     onLoad: this.imageOnLoad,
                     style: {
                         opacity: 0
@@ -52,12 +53,13 @@ class ReactImageAppear extends Component {
     }
 
     imageOnLoad() {
-        const { src, animation, animationDuration, easing } = this.props;
+        const { src, animation, animationDuration, easing, alt } = this.props;
 
         this.setState((prevState, props) => {
             return {
                 imgComponent: React.createElement('img', {
                     src,
+                    alt,
                     style: {
                         animation: `${animation} ${animationDuration} ${easing}`
                     }
@@ -123,10 +125,11 @@ class ReactImageAppear extends Component {
     }
 
     createLoader() {
-        const { loader, loaderClass, showLoader } = this.props;
+        const { loader, loaderClass, showLoader, alt } = this.props;
 
         return showLoader ? React.createElement('img', {
             src: loader ? loader : LOADER,
+            alt,
             style: this.getLoaderStyle(),
             className: loaderClass
         }) : null;
@@ -172,7 +175,8 @@ ReactImageAppear.defaultProps = {
     animation: ANIMATION,
     animationDuration: ANIMATION_DURATION,
     easing: EASING,
-    showLoader: true
+    showLoader: true,
+    alt: ""
 };
 
 export default ReactImageAppear;
